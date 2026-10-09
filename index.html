@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gram Panchayat Ajnawar | Digital Portal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tiro+Devanagari+Hindi:ital@0;1&family=Yantramanav:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #003366;
+      --primary-dark: #001f3f;
+      --saffron: #ea580c;
+      --saffron-gold: #f59e0b;
+      --bg-base: #f8fafc;
+      --surface: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --radius: 10px;
+      --shadow-sm: 0 2px 8px rgba(0, 51, 102, 0.08);
+    }
+
+    html { scroll-behavior: smooth; font-size: 15px; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      font-family: 'Yantramanav', 'Plus Jakarta Sans', sans-serif; 
+      -webkit-tap-highlight-color: transparent; 
+    }
+    body { 
+      background-color: var(--bg-base); 
+      color: var(--text-main); 
+      line-height: 1.5; 
+      overflow-x: hidden; 
+      width: 100%;
+    }
+
+    .top-tricolor { height: 4px; background: linear-gradient(90deg, #ff9933 33.3%, #ffffff 33.3%, #ffffff 66.6%, #138808 66.6%); width: 100%; }
+
+    .govt-strip {
+      background: var(--primary-dark);
+      color: #cbd5e1;
+      padding: 6px 4%;
+      font-size: 0.78rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 8px 4%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border);
+    }
+    .brand-box { display: flex; align-items: center; gap: 10px; text-decoration: none; width: 100%; max-width: 1280px; margin: 0 auto; }
+    
+    .panchayat-logo-frame {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--primary);
+      background: #ffffff;
+      flex-shrink: 0;
+    }
+    .panchayat-logo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.4);
+      transform-origin: center center;
+    }
+
+    .brand-title h1 { font-family: 'Tiro Devanagari Hindi', serif; font-size: 1.4rem; color: var(--primary); line-height: 1.15; font-weight: 700; }
+    .brand-title p { font-size: 0.76rem; color: var(--text-muted); font-weight: 600; }
+
+    nav { 
+      background: var(--primary); 
+      position: sticky; 
+      top: 0; 
+      z-index: 999; 
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15); 
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      padding: 5px 3%;
+      gap: 6px;
+      justify-content: flex-start;
+      overflow: hidden;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .nav-toggle-btn {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav-quick-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 2px 0;
+      width: 100%;
+    }
+    .nav-quick-bar::-webkit-scrollbar { display: none; }
+
+    .nav-quick-bar a {
+      color: #f1f5f9;
+      text-decoration: none;
+      padding: 5px 12px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+    .nav-quick-bar a:hover { background: rgba(255,255,255,0.25); color: #fff; }
+
+    .menu-drawer {
+      display: none;
+      background: #e9f0f8;
+      border-top: 2px solid #004179;
+      border-bottom: 2px solid #cbd5e1;
+      padding: 12px 4%;
+    }
+    .menu-drawer.open { display: block; }
+    .menu-drawer ul {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      list-style: none;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .menu-drawer a {
+      color: #0f172a;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    
+    .drawer-login-wrap { display: flex; justify-content: center; margin-top: 6px; }
+    .drawer-login-btn {
+      background: #004179 !important;
+      color: #ffffff !important;
+      font-weight: 700;
+      padding: 8px 28px !important;
+      border-radius: 50px !important;
+      border: 1px solid #002b52 !important;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 2px 6px rgba(0, 65, 121, 0.25);
+    }
+
+    .ticker-wrap {
+      background: #fffbeb;
+      border-bottom: 1px solid #fed7aa;
+      padding: 6px 3%;
+      display: flex;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+    .ticker-badge {
+      background: var(--saffron);
+      color: #fff;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      margin-right: 8px;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(0, 34, 68, 0.95) 0%, rgba(0, 51, 102, 0.90) 100%);
+      color: #ffffff;
+      padding: 16px 4% 14px 4%;
+      text-align: center;
+    }
+    .hero-banner h2 { font-family: 'Tiro Devanagari Hindi', serif; font-size: 1.5rem; margin-bottom: 8px; }
+
+    .panchayat-hero-image-wrap {
+      margin: 0 auto 10px auto;
+      max-width: 380px;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .panchayat-hero-image-wrap img { width: 100%; height: auto; max-height: 175px; object-fit: cover; display: block; }
+
+    .hero-stats { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+    .stat-pill { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); padding: 4px 12px; border-radius: 50px; font-size: 0.78rem; font-weight: 700; }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 20px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 2.4fr 1.1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 992px) { 
+      .container { 
+        grid-template-columns: 1fr; 
+        padding: 0 12px; 
+        margin: 12px auto; 
+      } 
+    }
+
+    .rpsc-standard-card {
+      border: 2px solid var(--primary);
+      border-radius: var(--radius);
+      background: var(--surface);
+      overflow: hidden;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      width: 100%;
+    }
+    .rpsc-card-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #ffffff;
+      padding: 9px 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-bottom: 2.5px solid var(--saffron);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .rpsc-card-header .header-left { display: flex; align-items: center; gap: 8px; }
+    .rpsc-card-header i { color: var(--saffron-gold); }
+    .rpsc-header-pill {
+      font-size: 0.7rem;
+      background: rgba(255, 255, 255, 0.18);
+      color: #fef08a;
+      padding: 2px 8px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      font-weight: 700;
+    }
+    .rpsc-card-body { padding: 10px; background: #ffffff; }
+
+    .rpsc-news-container { height: 220px; max-height: 220px; overflow-y: hidden; position: relative; }
+    .rpsc-news-content { position: relative; top: 0; }
+    .rpsc-news-item {
+      display: block;
+      padding: 9px 11px;
+      margin-bottom: 7px;
+      background-color: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 0.83rem;
+      line-height: 1.45;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .rpsc-badge-date {
+      display: inline-block;
+      padding: 2px 7px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #0284c7;
+      background-color: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 4px;
+      margin-right: 7px;
+      vertical-align: middle;
+    }
+    .rpsc-card-footer {
+      padding: 7px 12px;
+      background-color: #f8fafc;
+      border-top: 1px solid var(--border);
+      text-align: right;
+      font-size: 0.82rem;
+    }
+    .rpsc-card-footer a { color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+
+    .pill-link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.82rem;
+      gap: 6px;
+      margin-bottom: 6px;
+      transition: all 0.2s ease;
+    }
+    .pill-link-btn:hover { background: #eff6ff; border-color: #93c5fd; }
+    .pill-link-btn .pill-left { display: flex; align-items: center; gap: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pill-icon-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .pill-tag-open {
+      font-size: 0.7rem;
+      background: #e2e8f0;
+      color: #334155;
+      padding: 2px 7px;
+      border-radius: 50px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+
+    /* Officers Grid: Mobile par 2 barabar compact cards */
+    .leadership-grid { 
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 10px; 
+      justify-content: center;
+    }
+    @media (min-width: 768px) {
+      .leadership-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+      }
+    }
+    .leader-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 12px 6px; text-align: center; }
+    .leader-avatar { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); margin: 0 auto 6px auto; display: block; }
+    .leader-box h4 { font-size: 0.88rem; color: var(--text-main); font-weight: 700; margin-bottom: 2px; }
+    .leader-box .post-title { font-size: 0.74rem; color: var(--primary); font-weight: 700; margin-bottom: 6px; }
+    .btn-call { display: inline-flex; align-items: center; gap: 4px; background: var(--primary); color: #fff; padding: 4px 12px; border-radius: 50px; text-decoration: none; font-size: 0.74rem; font-weight: 700; }
+
+    .panch-list-container { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 10px; 
+    }
+    .panch-list-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      gap: 10px;
+    }
+    .panch-list-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .panch-ward-badge { background: #003366; color: #ffffff; font-weight: 800; font-size: 0.72rem; padding: 3px 8px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
+    .panch-avatar-sm { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--saffron); flex-shrink: 0; }
+    .panch-detail-wrap { min-width: 0; }
+    .panch-name-txt { font-size: 0.82rem; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .panch-phone-txt { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; }
+    .panch-call-btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .works-table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); border-radius: 6px; background: #ffffff; }
+    .works-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; table-layout: fixed; }
+    .works-table th { background: #e2e8f0; padding: 7px 8px; text-align: left; color: var(--primary-dark); font-weight: 700; white-space: nowrap; }
+    .works-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); word-break: break-word; }
+
+    .inst-grid { display: grid; grid-template-columns: 1fr; gap: 7px; }
+    .inst-item { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .inst-item-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .inst-thumb { width: 40px; height: 40px; border-radius: 6px; object-fit: cover; flex-shrink: 0; border: 1px solid var(--border); }
+    .inst-info h5 { font-size: 0.8rem; font-weight: 700; margin-bottom: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .inst-info p { font-size: 0.72rem; color: var(--text-muted); }
+    .inst-call { width: 30px; height: 30px; border-radius: 50%; background: #dcfce7; color: #15803d; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.82rem; flex-shrink: 0; }
+
+    .schemes-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .scheme-item { background: #f8fafc; border: 1px solid var(--border); border-left: 3.5px solid var(--primary); border-radius: 6px; padding: 10px; }
+    .scheme-pill-badge { display: inline-flex; align-items: center; gap: 4px; background: #eff6ff; color: var(--primary); border: 1px solid #bfdbfe; padding: 2px 8px; border-radius: 50px; font-size: 0.74rem; font-weight: 800; margin-bottom: 5px; }
+    .scheme-item p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+    /* Gallery Grid: Mobile par 2 barabar compact photos */
+    .gallery-grid { 
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 10px; 
+    }
+    @media (min-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      }
+    }
+    .gallery-item { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .gallery-item img { width: 100%; height: 110px; object-fit: cover; display: block; }
+    .gallery-info { padding: 4px 6px; font-size: 0.74rem; font-weight: 700; }
+
+    .charter-banner { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 6px 10px; margin-bottom: 10px; font-size: 0.76rem; color: #166534; font-weight: 700; }
+    .tracker-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 10px; margin-bottom: 12px; }
+    .tracker-form { display: flex; gap: 5px; margin-top: 5px; }
+    .tracker-form input { flex: 1; padding: 6px; border: 1px solid var(--border); border-radius: 5px; font-weight: 700; font-size: 0.8rem; }
+    .tracker-form button { background: var(--primary); color: #fff; border: none; padding: 6px 10px; border-radius: 5px; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
+
+    .form-group { margin-bottom: 8px; }
+    .form-group label { display: block; font-size: 0.78rem; font-weight: 700; margin-bottom: 2px; }
+    .form-control { width: 100%; padding: 7px 9px; border: 1px solid var(--border); border-radius: 5px; font-size: 0.82rem; }
+    
+    .btn-submit { background: var(--saffron); color: #fff; border: none; padding: 8px 18px; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-submit-block { width: 100%; justify-content: center; }
+
+    .emergency-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+      gap: 8px; 
+    }
+    .emergency-box { border: 1px solid var(--border); background: #f8fafc; padding: 6px 4px; border-radius: 6px; text-align: center; }
+    .emergency-num { font-size: 0.95rem; font-weight: 800; color: #dc2626; display: block; }
+    .emergency-title { font-size: 0.68rem; color: var(--text-muted); font-weight: 700; margin-top: 1px; }
+
+    .back-to-top { position: fixed; bottom: 18px; left: 16px; background: var(--primary-dark); color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; z-index: 998; text-decoration: none; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .back-to-top.visible { opacity: 1; pointer-events: auto; }
+
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2000; align-items: center; justify-content: center; padding: 12px; }
+    
+    .clean-login-card { background: #ffffff; width: 100%; max-width: 340px; border-radius: 12px; overflow: hidden; border: 2px solid var(--primary); box-shadow: 0 10px 25px rgba(0,0,0,0.3); position: relative; }
+    .clean-login-header { background: var(--primary); color: #fff; padding: 12px 14px; display: flex; justify-content: center; align-items: center; font-size: 1rem; font-weight: 700; position: relative; text-align: center; }
+    .clean-login-close-btn { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; font-size: 1.4rem; cursor: pointer; line-height: 1; }
+    .clean-login-body { padding: 16px; }
+    .login-btn-center-row { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 14px; }
+    .btn-login-main { background: var(--primary); color: #fff; padding: 7px 20px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 0.85rem; }
+    .btn-login-close { background: #64748b; color: #fff; padding: 7px 18px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 0.82rem; }
+
+    .smart-popup-card { background: #ffffff !important; width: 100%; max-width: 340px; border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,0.35); border-top: 4px solid #059669; }
+    .token-copy-box { background: #f1f5f9; padding: 8px; border-radius: 6px; margin-bottom: 12px; border: 1px dashed var(--border); cursor: pointer; }
+
+    #customToast { display: none; position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: #0f172a; color: #fff; padding: 7px 16px; border-radius: 50px; font-size: 0.78rem; font-weight: 700; z-index: 4000; box-shadow: 0 4px 15px rgba(0,0,0,0.3); white-space: nowrap; text-align: center; }
+
+    #allNewsViewModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #f1f5f9;
+      z-index: 3500;
+      overflow-y: auto;
+    }
+    .top-navy-bar {
+      background: #002244;
+      color: #ffffff;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .top-navy-title {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .btn-orange-home {
+      background: #f97316;
+      color: #ffffff;
+      border: none;
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .screenshot-card-box {
+      max-width: 720px;
+      margin: 16px auto;
+      padding: 0 12px 40px 12px;
+    }
+    .screenshot-main-card {
+      background: #ffffff;
+      border: 2px solid #003366;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
+    }
+    .screenshot-card-top {
+      background: #002b5c;
+      color: #ffffff;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2.5px solid #ea580c;
+    }
+    .screenshot-card-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .badge-all-records {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fef08a;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 50px;
+    }
+    .screenshot-items-list {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    #docPreviewModal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.85); z-index: 4500; align-items: center; justify-content: center; padding: 10px; }
+    .pdf-paper-card { background: #ffffff; width: 100%; max-width: 600px; max-height: 90vh; border-radius: 8px; overflow-y: auto; border-top: 5px solid var(--primary); }
+    .pdf-header-bar { padding: 10px 14px; background: #f8fafc; border-bottom: 1.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .pdf-body-content { padding: 16px 18px; font-size: 0.88rem; line-height: 1.6; }
+
+    #fullscreenDashboard { display: none; position: fixed; inset: 0; background: #f1f5f9; z-index: 3000; overflow-y: auto; }
+    .dash-topbar { background: var(--primary-dark); color: #fff; padding: 10px 4%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; }
+    .dash-content { max-width: 1000px; margin: 12px auto; padding: 0 10px 30px 10px; }
+    .admin-tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--border); padding-bottom: 5px; margin-bottom: 10px; overflow-x: auto; }
+    .admin-tab-btn { background: none; border: none; padding: 5px 10px; cursor: pointer; font-weight: 700; color: var(--text-muted); border-radius: 4px; white-space: nowrap; font-size: 0.78rem; }
+    .admin-tab-btn.active { background: var(--primary); color: #fff; }
+
+    .admin-card-deck { display: flex; flex-direction: column; gap: 8px; }
+    .admin-data-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+
+    /* ==============================================================
+       EXECUTIVE GOVERNMENT FOOTER
+       ============================================================== */
+    footer {
+      background: linear-gradient(180deg, #001f3f 0%, #001226 100%);
+      color: #94a3b8;
+      padding: 24px 0 0 0;
+      border-top: 3.5px solid var(--saffron);
+      width: 100%;
+    }
+    
+    .footer-top-details {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.84rem;
+    }
+
+    .footer-top-details .copy-txt {
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    .footer-top-details .copy-txt b {
+      color: #ffffff;
+    }
+
+    .last-updated-pill {
+      background: rgba(255, 255, 255, 0.1);
+      color: #f1f5f9;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 3px 12px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.76rem;
+      letter-spacing: 0.3px;
+    }
+
+    .footer-bottom-strip {
+      width: 100%;
+      margin-top: 18px;
+      padding: 11px 16px;
+      background: #00172e;
+      border-top: 1.5px solid rgba(245, 158, 11, 0.35);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .footer-contact-box-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 7px 36px;
+      border: 1.5px solid #d97706;
+      border-radius: 8px;
+      color: #001f3f;
+      font-weight: 800;
+      font-size: 0.94rem;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+      background: linear-gradient(180deg, #fbb825 0%, #f59e0b 100%);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+    }
+
+    .footer-contact-box-btn i {
+      color: #001f3f;
+      font-size: 0.95rem;
+    }
+
+    .footer-contact-box-btn:hover {
+      background: linear-gradient(180deg, #fed766 0%, #fbbf24 100%);
+      border-color: #b45309;
+      color: #001226;
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+    }
+    
+    /* Clean Tawk.to Launcher Suppression (Zero Flicker) */
+    #tawk-default-container,
+    .tawk-min-container {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+  </style>
+</head>
+<body id="top">
+
+  <div class="top-tricolor"></div>
+
+  <div class="govt-strip">
+    <div><i class="fa-solid fa-landmark-flag"></i> पंचायती राज विभाग राजस्थान | ग्राम पंचायत अजनावर (325221)</div>
+    <div style="font-weight: 700; color: #fef08a;">सशक्त गाँव - डिजिटल अजनावर</div>
+  </div>
+
+  <header>
+    <a href="#top" class="brand-box">
+      <div class="panchayat-logo-frame">
+        <img src="images/brand/panchayatlogo.jpg" onerror="this.onerror=null; this.src='images/brand/panchayatlogo.png';" alt="Logo">
+      </div>
+      <div class="brand-title">
+        <h1>ग्राम पंचायत अजनावर</h1>
+        <p>पंचायत समिति - छीपाबड़ौद | जिला - बारां (राजस्थान)</p>
+      </div>
+    </a>
+  </header>
+
+  <nav>
+    <div class="nav-container">
+      <button class="nav-toggle-btn" onclick="toggleMenuDrawer()" title="Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="nav-quick-bar">
+        <a href="#newsSection"><i class="fa fa-newspaper"></i> नवीन सूचनाएँ</a>
+        <a href="#officers"><i class="fa-solid fa-users"></i> प्रतिनिधि</a>
+        <a href="#wardPanchSection"><i class="fa-solid fa-address-card"></i> वार्ड पंच</a>
+        <a href="#works"><i class="fa-solid fa-person-digging"></i> विकास कार्य</a>
+        <a href="#institutions"><i class="fa-solid fa-building-flag"></i> संस्थाएँ</a>
+        <a href="#schemes"><i class="fa-solid fa-hand-holding-heart"></i> योजनाएँ</a>
+        <a href="#gallery"><i class="fa-solid fa-images"></i> गैलरी</a>
+        <a href="#importantLinks"><i class="fa-solid fa-link"></i> Important Links</a>
+        <a href="#grievance"><i class="fa-solid fa-file-pen"></i> शिकायत निवारण</a>
+      </div>
+    </div>
+
+    <div class="menu-drawer" id="menuDrawer">
+      <ul>
+        <li><a href="#newsSection" onclick="toggleMenuDrawer()"><i class="fa fa-newspaper" style="color:var(--saffron);"></i> नवीन सरकारी सूचनाएँ व आदेश</a></li>
+        <li><a href="#officers" onclick="toggleMenuDrawer()"><i class="fa-solid fa-users" style="color:var(--primary);"></i> पंचायत पदाधिकारी व वार्ड पंच</a></li>
+        <li><a href="#importantLinks" onclick="toggleMenuDrawer()"><i class="fa-solid fa-link" style="color:#0284c7;"></i> महत्वपूर्ण नागरिक पोर्टल सेवाएँ</a></li>
+        <li><a href="#grievance" onclick="toggleMenuDrawer()"><i class="fa-solid fa-file-pen" style="color:#16a34a;"></i> ऑनलाइन समस्या निवारण (शिकायत)</a></li>
+        <li class="drawer-login-wrap">
+          <a href="javascript:void(0)" onclick="toggleMenuDrawer(); openPehchanLogin();" class="drawer-login-btn">
+            <i class="fa-solid fa-lock"></i> पंचायत एडमिन लॉगिन
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="ticker-wrap">
+    <span class="ticker-badge"><i class="fa-solid fa-bullhorn"></i> सूचना पट्ट</span>
+    <marquee behavior="scroll" direction="left" scrollamount="5" id="noticeTickerText"></marquee>
+  </div>
+
+  <section class="hero-banner">
+    <h2>पंचायत भवन अजनावर</h2>
+    <div class="panchayat-hero-image-wrap">
+      <img src="images/brand/panchayat.jpg" onerror="this.onerror=null; this.src='images/brand/panchayat.png';" alt="पंचायत भवन">
+    </div>
+    <div class="hero-stats">
+      <span class="stat-pill"><i class="fa-solid fa-users"></i> जनसंख्या: ~4,500+</span>
+      <span class="stat-pill"><i class="fa-solid fa-table-cells-large"></i> कुल वार्ड: 11 वार्ड</span>
+    </div>
+  </section>
+
+  <div class="container">
+    <main>
+
+      <section class="rpsc-standard-card" id="newsSection">
+        <div class="rpsc-card-header">
+          <div class="header-left">
+            <i class="fa fa-newspaper"></i>
+            <span>News and Events</span>
+          </div>
+          <span class="rpsc-header-pill">नवीन सूचनाएँ</span>
+        </div>
+        <div class="rpsc-card-body">
+          <div class="rpsc-news-container" id="rpscNewsScrollBox">
+            <div class="rpsc-news-content" id="rpscNewsContent"></div>
+          </div>
+        </div>
+        <div class="rpsc-card-footer">
+          <i class="fa-solid fa-magnifying-glass-arrow-right"></i>
+          <a href="javascript:void(0)" onclick="openAllNewsPage()">View all</a>
+        </div>
+      </section>
+
+      <section class="rpsc-standard-card" id="officers">
+        <div class="rpsc-card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-users-viewfinder"></i>
+            <span>पंचायत नेतृत्व एवं मुख्य पदाधिकारी</span>
+          </div>
+          <span class="rpsc-header-pill">जनप्रतिनिधि</span>
+        </div>
+        <div class="rpsc-card-body">
+          <div class="leadership-grid" id="coreLeadershipContainer"></div>
+        </div>
+      </section>
+
+      <section class="rpsc-standard-card" id="wardPanchSection">
+        <div class="rpsc-card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-address-card"></i>
+            <span>वार्ड पंच सूची</span>
+          </div>
+          <span class="rpsc-header-pill">11 वार्ड प्रतिनिधि</span>
+        </div>
+        <div class="rpsc-card-body">
+          <div class="panch-list-container" id="wardPanchContainer"></div>
+        </div>
+      </section>
+
+      <section class="rpsc-standard-card" id="works">
+        <div class="rpsc-card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-person-digging"></i>
+            <span>स्वीकृत एवं प्रगतिशील विकास कार्य</span>
+          </div>
+          <span class="rpsc-header-pill">पारदर्शिता डैशबोर्ड</span>
+        </div>
+        <div class="rpsc-card-body" style="padding: 6px;">
+          <div class="works-table-wrap">
+            <table class="works-table">
+              <thead>
+                <tr>
+                  <th style="width: 38%;">कार्य विवरण</th>
+                  <th style="width: 22%;">बजट</th>
+                  <th style="width: 24%;">मद/योजना</th>
+                  <th style="width: 16%;">स्थिति</th>
+                </tr>
+              </thead>
+              <tbody id="worksTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="rpsc-standard-card" id="institutions">
+        <div class="rpsc-card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-building-flag"></i>
+            <span>सरकारी संस्थाएँ एवं संपर्क सूत्र</span>
+          </div>
+          <span class="rpsc-header-pill">ग्राम स्तरीय कार्यालय</span>
+        </div>
+        <div class="rpsc-card-body">
+          <div class="inst-grid" id="institutionsContainer"></div>
+        </div>
+      </section>
+
+      <section class="rpsc-standard-card" id="schemes">
+        <div class="rpsc-card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            <span>प्रमुख सरकारी कल्याणकारी योजनाएँ</span>
+          </div>
+          <span class="rpsc-header-pill">ग्रामीण विकास</span>
+        </div>
+        <div class="rpsc-card-body">
+          <div class="schemes-grid" id="schemesDisplayContainer"></div>
+        </div>
+      </section>
+
+      <section class="rpsc-standard-card" id="gallery">
+        <div class="rpsc-card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-images"></i>
+            <span>कार्य एवं गतिविधि फ़ोटो गैलरी</span>
+          </div>
+          <span class="rpsc-header-pill">विकास झलकियाँ</span>
+        </div>
+        <div class="rpsc-card-body">
+          <div class="gallery-grid" id="galleryContainer"></div>
+        </div>
+      </section>
+
+      <section class="rpsc-standard-card" id="grievance">
+        <div class="rpsc-card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-file-pen"></i>
+            <span>ऑनलाइन नागरिक समस्या निवारण</span>
+          </div>
+          <span class="rpsc-header-pill">लोक सेवा गारंटी</span>
+        </div>
+        <div class="rpsc-card-body">
+          <div class="charter-banner">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>कार्य निस्तारण समय-सीमा: 7 से 15 कार्य दिवस</span>
+          </div>
+
+          <div class="tracker-box">
+            <h5 style="color:var(--primary); font-weight:700; font-size:0.82rem;"><i class="fa-solid fa-magnifying-glass"></i> दर्ज शिकायत स्थिति ट्रैक करें</h5>
+            <div class="tracker-form">
+              <input type="text" id="trackTokenInput" placeholder="टोकन दर्ज करें">
+              <button type="button" onclick="trackComplaint()">Track</button>
+            </div>
+            <div id="trackResultBox" style="display:none; margin-top:8px; background:#fff; padding:8px; border-radius:5px; border:1px solid #bfdbfe;"></div>
+          </div>
+
+          <form onsubmit="submitGrievance(event)">
+            <div class="form-group">
+              <label>आवेदक का पूरा नाम *</label>
+              <input type="text" id="gName" class="form-control" placeholder="पूरा नाम दर्ज करें" required>
+            </div>
+            
+            <div class="form-group">
+              <label>मोबाइल नंबर *</label>
+              <input type="tel" id="gPhone" maxlength="10" class="form-control" placeholder="10-अंकीय मोबाइल नंबर" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" required>
+            </div>
+            
+            <div class="form-group"><label>वार्ड चुनें *</label>
+              <select id="gWard" class="form-control" required>
+                <option value="">-- कृपया अपना वार्ड चुनें --</option>
+                <option value="वार्ड 1">वार्ड 1</option><option value="वार्ड 2">वार्ड 2</option><option value="वार्ड 3">वार्ड 3</option><option value="वार्ड 4">वार्ड 4</option><option value="वार्ड 5">वार्ड 5</option><option value="वार्ड 6">वार्ड 6</option><option value="वार्ड 7">वार्ड 7</option><option value="वार्ड 8">वार्ड 8</option><option value="वार्ड 9">वार्ड 9</option><option value="वार्ड 10">वार्ड 10</option><option value="वार्ड 11">वार्ड 11</option>
+              </select>
+            </div>
+
+            <div class="form-group"><label>समस्या का प्रकार *</label>
+              <select id="gType" class="form-control" required>
+                <option value="">-- कृपया समस्या का प्रकार चुनें --</option>
+                <option value="पेयजल / हैंडपंप मरम्मत">पेयजल / हैंडपंप मरम्मत</option>
+                <option value="सड़क एवं नाली निर्माण/मरम्मत">सड़क एवं नाली निर्माण/मरम्मत</option>
+                <option value="स्ट्रीट लाइट / विद्युत समस्या">स्ट्रीट लाइट / विद्युत समस्या</option>
+                <option value="सफाई व्यवस्था एवं कचरा निस्तारण">सफाई व्यवस्था एवं कचरा निस्तारण</option>
+                <option value="आवासीय पट्टा / भवन निर्माण स्वीकृति">आवासीय पट्टा / भवन निर्माण स्वीकृति</option>
+                <option value="प्रधानमंत्री आवास योजना (PMAY)">प्रधानमंत्री आवास योजना (PMAY)</option>
+                <option value="सामाजिक सुरक्षा पेंशन / पालनहार">सामाजिक सुरक्षा पेंशन / पालनहार</option>
+                <option value="राशन वितरण / NFSA खाद्य सुरक्षा">राशन वितरण / NFSA खाद्य सुरक्षा</option>
+                <option value="कृषि सेवा / नहर / सिंचाई समस्या">कृषि सेवा / नहर / सिंचाई समस्या</option>
+                <option value="अन्य समस्या अथवा जन सुझाव">अन्य समस्या अथवा जन सुझाव</option>
+              </select>
+            </div>
+
+            <div class="form-group"><label>समस्या का विवरण *</label><textarea id="gMsg" class="form-control" rows="3" placeholder="समस्या का पूरा विवरण लिखें..." required></textarea></div>
+            <button type="submit" class="btn-submit btn-submit-block"><i class="fa-solid fa-paper-plane"></i> शिकायत दर्ज करें</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+
+    <aside>
+      <section class="rpsc-standard-card" id="importantLinks">
+        <div class="rpsc-card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-link"></i>
+            <span>Important Links</span>
+          </div>
+          <span class="rpsc-header-pill">प्रमुख नागरिक सेवाएँ</span>
+        </div>
+        <div class="rpsc-card-body">
+          <!-- WhatsApp Channel Official Link -->
+          <a href="https://whatsapp.com/channel/0029Vb9bElsGE56fXED0MU1d" target="_blank" class="pill-link-btn" style="background: #f0fdf4; border-color: #86efac;">
+            <div class="pill-left">
+              <div class="pill-icon-circle" style="color: #16a34a; background: #dcfce7; border-color: #86efac;">
+                <i class="fa-brands fa-whatsapp" style="font-size: 0.95rem;"></i>
+              </div>
+              <span style="color: #166534; font-weight: 800;">व्हाट्सएप चैनल (पंचायत सूचना बुलेटिन)</span>
+            </div>
+            <span class="pill-tag-open" style="background: #22c55e; color: #ffffff;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Join</span>
+          </a>
+
+          <a href="https://pehchan.rajasthan.gov.in/" target="_blank" class="pill-link-btn">
+            <div class="pill-left">
+              <div class="pill-icon-circle"><i class="fa-solid fa-certificate"></i></div>
+              <span>पहचान पोर्टल (जन्म / मृत्यु / विवाह)</span>
+            </div>
+            <span class="pill-tag-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</span>
+          </a>
+
+          <a href="https://janapp.rajasthan.gov.in/janaadhaar/citizenDashboard" target="_blank" class="pill-link-btn">
+            <div class="pill-left">
+              <div class="pill-icon-circle"><i class="fa-solid fa-address-card" style="color:var(--saffron);"></i></div>
+              <span>जन आधार सेवा (डाउनलोड व स्थिति)</span>
+            </div>
+            <span class="pill-tag-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</span>
+          </a>
+
+          <a href="https://myaadhaar.uidai.gov.in/" target="_blank" class="pill-link-btn">
+            <div class="pill-left">
+              <div class="pill-icon-circle"><i class="fa-solid fa-fingerprint"></i></div>
+              <span>आधार सेवा पोर्टल (UIDAI Services)</span>
+            </div>
+            <span class="pill-tag-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</span>
+          </a>
+
+          <a href="https://rrcc.rajasthan.gov.in/Login.aspx" target="_blank" class="pill-link-btn">
+            <div class="pill-left">
+              <div class="pill-icon-circle"><i class="fa-solid fa-wheat-awn" style="color:var(--saffron);"></i></div>
+              <span>राशन कार्ड सेवा (RRCC Digital)</span>
+            </div>
+            <span class="pill-tag-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</span>
+          </a>
+
+          <a href="https://apnakhata.rajasthan.gov.in/" target="_blank" class="pill-link-btn">
+            <div class="pill-left">
+              <div class="pill-icon-circle"><i class="fa-solid fa-map-location-dot"></i></div>
+              <span>अपना खाता राजस्थान (जमाबंदी/भू-नक्शा)</span>
+            </div>
+            <span class="pill-tag-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</span>
+          </a>
+
+          <a href="https://jansoochna.rajasthan.gov.in" target="_blank" class="pill-link-btn">
+            <div class="pill-left">
+              <div class="pill-icon-circle"><i class="fa-solid fa-users" style="color:var(--saffron);"></i></div>
+              <span>जन सूचना पोर्टल (पात्रता व लाभ)</span>
+            </div>
+            <span class="pill-tag-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</span>
+          </a>
+
+          <a href="https://parivahan.gov.in/parivahan/" target="_blank" class="pill-link-btn">
+            <div class="pill-left">
+              <div class="pill-icon-circle"><i class="fa-solid fa-motorcycle"></i></div>
+              <span>परिवहन सारथी / RTO वाहन सेवा</span>
+            </div>
+            <span class="pill-tag-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</span>
+          </a>
+
+          <a href="https://ssp.rajasthan.gov.in/" target="_blank" class="pill-link-btn">
+            <div class="pill-left">
+              <div class="pill-icon-circle"><i class="fa-solid fa-hand-holding-heart" style="color:var(--saffron);"></i></div>
+              <span>सामाजिक सुरक्षा पेंशन व पालनहार</span>
+            </div>
+            <span class="pill-tag-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="rpsc-standard-card" id="location">
+        <div class="rpsc-card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <span>ग्राम पंचायत अजनावर - लाइव नक्शा</span>
+          </div>
+        </div>
+        <div class="rpsc-card-body" style="padding: 4px;">
+          <div style="height:210px; border-radius:6px; overflow:hidden;">
+            <iframe src="https://maps.google.com/maps?q=Ajnawar,Chhipabarod,Baran,Rajasthan&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="rpsc-standard-card" id="helpline">
+        <div class="rpsc-card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>आपातकालीन हेल्पलाइन</span>
+          </div>
+        </div>
+        <div class="rpsc-card-body">
+          <div class="emergency-grid">
+            <div class="emergency-box"><span class="emergency-num">100 / 112</span><span class="emergency-title">पुलिस</span></div>
+            <div class="emergency-box"><span class="emergency-num">108</span><span class="emergency-title">एम्बुलेंस</span></div>
+            <div class="emergency-box"><span class="emergency-num">101</span><span class="emergency-title">फायर ब्रिगेड</span></div>
+            <div class="emergency-box"><span class="emergency-num">1090</span><span class="emergency-title">महिला सुरक्षा</span></div>
+            <div class="emergency-box"><span class="emergency-num">1098</span><span class="emergency-title">चाइल्ड लाइन</span></div>
+            <div class="emergency-box"><span class="emergency-num">181</span><span class="emergency-title">राज. संपर्क</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="rpsc-standard-card">
+        <div class="rpsc-card-header">
+          <div class="header-left">
+            <i class="fa-solid fa-address-book"></i>
+            <span>कार्यालय संपर्क</span>
+          </div>
+        </div>
+        <div class="rpsc-card-body">
+          <p style="font-size:0.84rem; line-height:1.6;">
+            <strong>कार्यालय:</strong> ग्राम पंचायत भवन<br>
+            <strong>ग्राम व डाकघर:</strong> अजनावर<br>
+            <strong>तहसील:</strong> छीपाबड़ौद | <strong>जिला:</strong> बारां (राज.)<br>
+            <strong>पिन कोड:</strong> 325221
+          </p>
+          <div style="background:#fdf2f2; border-left:3px solid #dc2626; padding:8px; border-radius:5px; margin-top:8px; font-size:0.78rem;">
+            <strong style="color:#991b1b;"><i class="fa-solid fa-envelope"></i> शाखा डाकघर अजनावर (325221)</strong>
+            <p>रजिस्ट्री, स्पीड पोस्ट, सुकन्या समृद्धि एवं IPPB आधार बैंकिंग सेवा उपलब्ध।</p>
+          </div>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <a href="#top" class="back-to-top" id="backToTopBtn" title="Back to Top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </a>
+
+  <!-- ALL RECORDS VIEW MODAL -->
+  <div id="allNewsViewModal">
+    <div class="top-navy-bar">
+      <span class="top-navy-title">Gram Panchayat Ajnawar</span>
+      <button class="btn-orange-home" onclick="closeAllNewsPage()">
+        <i class="fa-solid fa-house"></i> Home
+      </button>
+    </div>
+
+    <div class="screenshot-card-box">
+      <div class="screenshot-main-card">
+        <div class="screenshot-card-top">
+          <div class="screenshot-card-left">
+            <i class="fa fa-newspaper"></i>
+            <span>News and Events Section</span>
+          </div>
+          <span class="badge-all-records">All Records</span>
+        </div>
+        <div class="screenshot-items-list" id="allNewsListContainer"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document Preview Modal -->
+  <div id="docPreviewModal" onclick="if(event.target === this) closeDocPreview();">
+    <div class="pdf-paper-card">
+      <div class="pdf-header-bar">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button onclick="closeDocPreview()" style="background:#e2e8f0; border:none; padding:5px 10px; border-radius:4px; font-weight:bold; cursor:pointer; font-size:0.75rem;">
+            <i class="fa-solid fa-arrow-left"></i> वापस
+          </button>
+          <div>
+            <div style="font-weight:800; font-size:0.86rem; color:var(--primary);">कार्यालय आदेश / ई-दस्तावेज</div>
+            <div id="docDispatchNo" style="font-size:0.7rem; color:var(--text-muted);">क्र./ग्रा.पं.अ./2026/102</div>
+          </div>
+        </div>
+        <button onclick="closeDocPreview()" style="background:#e2e8f0; border:none; width:26px; height:26px; border-radius:50%; font-size:1rem; cursor:pointer; font-weight:bold;">&times;</button>
+      </div>
+
+      <div class="pdf-body-content" id="docPrintArea">
+        <div style="text-align:center; border-bottom:1.5px solid var(--primary); padding-bottom:8px; margin-bottom:10px;">
+          <img src="images/brand/panchayatlogo.jpg" onerror="this.onerror=null; this.src='images/brand/panchayatlogo.png';" style="width:46px; height:46px; border-radius:50%; margin-bottom:2px;" alt="Logo">
+          <h2 style="font-size:1.15rem; color:var(--primary); margin:0;">कार्यालय ग्राम पंचायत अजनावर</h2>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin:0;">पंचायत समिति: छीपाबड़ौद | जिला: बारां (राजस्थान) - 325221</p>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; font-size:0.78rem; margin-bottom:10px; font-weight:700;">
+          <span id="docDispatchTop">क्रमांक: ग्रा.पं.अ./2026/01</span>
+          <span id="docDateTop">दिनांक: 05/10/2026</span>
+        </div>
+
+        <div style="background:#eff6ff; border-left:3.5px solid var(--primary); padding:8px 10px; margin-bottom:12px; border-radius:4px;">
+          <strong id="docSubjectText">विषय: प्रेस नोट / आवश्यक सूचना</strong>
+        </div>
+
+        <div id="docBodyText" style="text-align:justify; margin-bottom:16px; font-size:0.84rem; color:#334155; line-height: 1.65;"></div>
+
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px; padding-top:10px; border-top:1px dashed var(--border);">
+          <div style="text-align:center;">
+            <img src="images/brand/approved.png" onerror="this.onerror=null; this.src='images/brand/panchayatlogo.jpg';" style="width:75px; height:75px; object-fit:contain;" alt="Official Seal">
+            <div style="font-size:0.7rem; color:#64748b; font-weight:700; margin-top:2px;">(कार्यालय अधिकृत मुहर)</div>
+          </div>
+          <div style="text-align:right; font-size:0.75rem; color:#64748b; font-weight:600;">
+            कम्प्यूटरीकृत डिजिटल ई-दस्तावेज
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:10px 14px; background:#f8fafc; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:8px;">
+        <button onclick="printCurrentDoc()" style="background:var(--primary); color:#fff; border:none; padding:6px 16px; border-radius:4px; font-weight:700; cursor:pointer; font-size:0.78rem;">
+          <i class="fa-solid fa-print"></i> प्रिंट / डाउनलोड
+        </button>
+        <button onclick="closeDocPreview()" style="background:#64748b; color:#fff; border:none; padding:6px 12px; border-radius:4px; font-weight:700; cursor:pointer; font-size:0.78rem;">
+          बंद करें
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panchayat Admin Login Modal -->
+  <div class="modal-backdrop" id="loginModal">
+    <div class="clean-login-card">
+      <div class="clean-login-header">
+        <span><i class="fa-solid fa-lock" style="margin-right: 8px;"></i>Panchayat Admin</span>
+        <button class="clean-login-close-btn" onclick="closeLoginModal()">&times;</button>
+      </div>
+      <div class="clean-login-body">
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label style="font-weight: 700; color: var(--primary); display: block; margin-bottom: 4px;">Enter Registered Email</label>
+          <input type="email" id="loginEmail" class="form-control" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 8px;">
+          <label style="font-weight: 700; color: var(--primary); display: block; margin-bottom: 4px;">Enter Password</label>
+          <input type="password" id="loginPassword" class="form-control" autocomplete="current-password" required>
+        </div>
+        <div style="text-align: right; margin-bottom: 10px;">
+          <a href="javascript:void(0)" onclick="handleForgotPassword()" style="color: #0284c7; font-size: 0.75rem; font-weight: 700; text-decoration: none;">Forget Password ?</a>
+        </div>
+        <div class="login-btn-center-row">
+          <button type="button" onclick="performLogin()" class="btn-login-main"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+          <button type="button" onclick="closeLoginModal()" class="btn-login-close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Complaint Success Popup -->
+  <div class="modal-backdrop" id="successModal">
+    <div class="smart-popup-card">
+      <i class="fa-solid fa-circle-check" style="font-size:2.2rem; color:#059669; margin-bottom:5px;"></i>
+      <h4 style="color:#0f172a; font-weight:800; font-size:1rem; margin-bottom:2px;">शिकायत दर्ज कर ली गई है!</h4>
+      <p style="font-size:0.74rem; color:var(--text-muted); margin-bottom:8px;">कार्य निस्तारण समय-सीमा: 7 से 15 कार्य दिवस</p>
+      <div class="token-copy-box" onclick="copyTokenToClipboard()">
+        <span id="popupTokenDisplay" style="font-size:1.15rem; font-weight:800; color:var(--primary);">AJN-1001</span>
+        <div id="copyFeedback" style="font-size:0.7rem; color:#059669; font-weight:700; margin-top:2px; display:none;">
+          <i class="fa-solid fa-check"></i> टोकन कॉपी हो गया!
+        </div>
+      </div>
+      <div style="display:flex; gap:6px; margin-top:6px;">
+        <button onclick="printAcknowledgment()" style="background:var(--primary); color:#fff; border:none; padding:6px 12px; border-radius:50px; font-weight:700; cursor:pointer; flex:1; font-size:0.78rem;">Print</button>
+        <button onclick="closeSuccessPopup()" style="background:#059669; color:#fff; border:none; padding:6px 12px; border-radius:50px; font-weight:700; cursor:pointer; flex:1; font-size:0.78rem;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="customToast"></div>
+
+  <!-- Fullscreen Dashboard -->
+  <div id="fullscreenDashboard">
+    <div class="dash-topbar">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <button onclick="closeDashboardAndReturn()" style="background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3); color:#fff; padding:4px 10px; border-radius:4px; font-weight:bold; cursor:pointer; font-size:0.75rem;">
+          <i class="fa-solid fa-house"></i> Home
+        </button>
+        <span style="font-weight:700; font-size:0.92rem;" id="dashHeaderTitle">Control Panel</span>
+      </div>
+      <button onclick="closeDashboardAndReturn()" style="background:#dc2626; color:#fff; border:none; padding:5px 12px; border-radius:50px; font-weight:700; cursor:pointer; font-size:0.78rem;">Logout</button>
+    </div>
+
+    <div class="dash-content">
+      <div class="admin-tabs">
+        <button class="admin-tab-btn active" id="tabBtnNotice" onclick="switchAdminTab('adTabNotice', this)">नोटिस बोर्ड</button>
+        <button class="admin-tab-btn" id="btnTabNewsAdmin" onclick="switchAdminTab('adTabNewsAdmin', this)">News and Events</button>
+        <button class="admin-tab-btn" id="tabBtnWorks" onclick="switchAdminTab('adTabWorks', this)">विकास कार्य</button>
+        <button class="admin-tab-btn" id="tabBtnGrievances" onclick="switchAdminTab('adTabGrievances', this)">शिकायत प्रबंधन</button>
+        <button class="admin-tab-btn" id="btnTabGallery" onclick="switchAdminTab('adTabGalleryAdmin', this)">Gallery</button>
+        <button class="admin-tab-btn" id="btnTabSchemes" onclick="switchAdminTab('adTabSchemes', this)">योजनाएँ</button>
+        <button class="admin-tab-btn" id="btnTabInstitutions" onclick="switchAdminTab('adTabInstitutions', this)">सरकारी संस्थाएँ</button>
+        <button class="admin-tab-btn" id="btnTabOfficers" onclick="switchAdminTab('adTabOfficers', this)">मुख्य पदाधिकारी</button>
+        <button class="admin-tab-btn" id="btnTabPanchs" onclick="switchAdminTab('adTabPanchs', this)">वार्ड पंच</button>
+        <button class="admin-tab-btn" id="btnTabAuditLogs" onclick="switchAdminTab('adTabAuditLogs', this)">Logs</button>
+        <button class="admin-tab-btn" id="btnTabPassword" onclick="switchAdminTab('adTabSecurityAdmin', this)">Password Settings</button>
+        <button class="admin-tab-btn" id="btnTabBackup" onclick="switchAdminTab('adTabBackup', this)">System Backup</button>
+      </div>
+
+      <div id="adTabNotice" class="admin-tab-sec">
+        <div class="form-group"><label>लाइव सूचना पट्टी का विवरण:</label><textarea id="admNoticeText" class="form-control" rows="3"></textarea></div>
+        <div style="display:flex; gap: 8px; justify-content:center;">
+          <button class="btn-submit" onclick="saveNotice()"><i class="fa-solid fa-paper-plane"></i> प्रकाशित करें</button>
+          <button type="button" onclick="clearNotice()" style="background:#fee2e2; color:#dc2626; border:1px solid #f87171; padding:7px 14px; border-radius:50px; font-weight:700; cursor:pointer; font-size:0.82rem;">हटाएं</button>
+        </div>
+      </div>
+
+      <div id="adTabNewsAdmin" class="admin-tab-sec" style="display:none;">
+        <h5 style="font-size:0.9rem; font-weight:700; margin-bottom:6px;" id="newsFormHeading">नया सरकारी आदेश / सूचना जोड़ें</h5>
+        <input type="hidden" id="editNewsIndex" value="-1">
+        <div class="form-group"><input type="text" id="admNewsTitle" class="form-control" placeholder="सूचना / आदेश का शीर्षक (Title)"></div>
+        <div style="grid-template-columns:1fr 1fr; gap:6px; display:grid;">
+          <div class="form-group"><input type="text" id="admNewsDate" class="form-control" placeholder="दिनांक (उदा. 07/10/2026)"></div>
+          <div class="form-group"><input type="text" id="admNewsDispatch" class="form-control" placeholder="क्रमांक / डिस्पैच नं."></div>
+        </div>
+        <div class="form-group"><textarea id="admNewsBody" class="form-control" rows="3" placeholder="आदेश का पूरा विवरण (Order details)..."></textarea></div>
+        <div style="text-align:center; display:flex; gap:8px; justify-content:center;">
+          <button class="btn-submit" id="btnSaveNewsAction" onclick="saveOrUpdateNewsItem()"><i class="fa-solid fa-plus"></i> प्रकाशित करें</button>
+          <button type="button" id="btnCancelNewsEdit" onclick="cancelNewsEdit()" style="display:none; background:#64748b; color:#fff; border:none; padding:7px 14px; border-radius:50px; font-weight:700; cursor:pointer; font-size:0.82rem;">रद्द करें</button>
+        </div>
+        <h5 style="font-size:0.88rem; font-weight:700; margin:16px 0 6px 0;">वर्तमान प्रकाशित आदेश व सूचनाएँ (Manage All)</h5>
+        <div class="admin-card-deck" id="admNewsCardList"></div>
+      </div>
+
+      <div id="adTabWorks" class="admin-tab-sec" style="display:none;">
+        <h5 style="font-size:0.9rem; font-weight:700; margin-bottom:6px;" id="admWorkFormHeading">नया विकास कार्य जोड़ें</h5>
+        <input type="hidden" id="editWorkIndex" value="-1">
+        <div class="form-group"><input type="text" id="admWorkName" class="form-control" placeholder="कार्य का नाम"></div>
+        <div class="form-group"><input type="text" id="admWorkBudget" class="form-control" placeholder="स्वीकृत बजट"></div>
+        <div class="form-group"><input type="text" id="admWorkAgency" class="form-control" placeholder="मद / योजना"></div>
+        <div class="form-group">
+          <label style="font-size:0.75rem; font-weight:700;">कार्य स्थिति:</label>
+          <select id="admWorkStatus" class="form-control">
+            <option value="प्रगति पर">प्रगति पर</option>
+            <option value="पूर्ण">पूर्ण</option>
+          </select>
+        </div>
+        <div style="text-align:center; display:flex; gap:8px; justify-content:center;">
+          <button class="btn-submit" id="btnSaveWorkAction" onclick="saveOrUpdateWorkItem()"><i class="fa-solid fa-plus"></i> प्रकाशित करें</button>
+          <button type="button" id="btnCancelWorkEdit" onclick="cancelWorkEdit()" style="display:none; background:#64748b; color:#fff; border:none; padding:7px 14px; border-radius:50px; font-weight:700; cursor:pointer; font-size:0.82rem;">रद्द करें</button>
+        </div>
+        <h5 style="font-size:0.88rem; font-weight:700; margin:16px 0 6px 0;">वर्तमान विकास कार्य सूची</h5>
+        <div class="admin-card-deck" id="admWorksCardList"></div>
+      </div>
+
+      <div id="adTabGrievances" class="admin-tab-sec" style="display:none;">
+        <div style="background:#fff; border:1px solid var(--border); border-radius:6px; padding:8px 10px; margin-bottom:10px; display:flex; gap:8px; align-items:center;">
+          <label style="font-size:0.78rem; font-weight:700;"><i class="fa-solid fa-filter"></i> वार्ड फ़िल्टर:</label>
+          <select id="admWardFilter" onchange="filterAdminGrievances()" class="form-control" style="font-size:0.78rem; padding:4px 8px;">
+            <option value="ALL">सभी वार्ड</option>
+            <option value="वार्ड 1">वार्ड 1</option><option value="वार्ड 2">वार्ड 2</option><option value="वार्ड 3">वार्ड 3</option><option value="वार्ड 4">वार्ड 4</option><option value="वार्ड 5">वार्ड 5</option><option value="वार्ड 6">वार्ड 6</option><option value="वार्ड 7">वार्ड 7</option><option value="वार्ड 8">वार्ड 8</option><option value="वार्ड 9">वार्ड 9</option><option value="वार्ड 10">वार्ड 10</option><option value="वार्ड 11">वार्ड 11</option>
+          </select>
+        </div>
+        <div class="admin-card-deck" id="admComplaintsCardList"></div>
+      </div>
+
+      <div id="adTabAuditLogs" class="admin-tab-sec" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h5 style="font-size:0.9rem; font-weight:700; color:var(--primary);"><i class="fa-solid fa-clock-rotate-left"></i> लॉगिन व ऑडिट इतिहास</h5>
+          <button onclick="clearAllAuditLogs()" style="background:#fee2e2; color:#dc2626; border:1px solid #fca5a5; padding:4px 10px; border-radius:4px; font-size:0.72rem; font-weight:700; cursor:pointer;">Clear Logs</button>
+        </div>
+        <div class="admin-card-deck" id="admbAuditLogsList"></div>
+      </div>
+
+      <div id="adTabGalleryAdmin" class="admin-tab-sec" style="display:none;">
+        <h5 style="font-size:0.9rem; font-weight:700; margin-bottom:6px;">फ़ोटो गैलरी में नई तस्वीर जोड़ें</h5>
+        <div class="form-group"><input type="text" id="newGalTitle" class="form-control" placeholder="तस्वीर का शीर्षक"></div>
+        <div class="form-group"><input type="file" id="newGalFile" accept="image/*" class="form-control"></div>
+        <div style="text-align:center;"><button class="btn-submit" onclick="saveGalleryPhoto()"><i class="fa-solid fa-plus"></i> जोड़ें</button></div>
+        <h5 style="font-size:0.88rem; font-weight:700; margin:14px 0 6px 0;">वर्तमान गैलरी सूची</h5>
+        <div class="admin-card-deck" id="admGalleryCardList"></div>
+      </div>
+
+      <div id="adTabSchemes" class="admin-tab-sec" style="display:none;">
+        <h5 style="font-size:0.9rem; font-weight:700; margin-bottom:6px;" id="schemeFormTitle">नई सरकारी योजना जोड़ें</h5>
+        <input type="hidden" id="editSchemeIndex" value="-1">
+        <div class="form-group"><input type="text" id="newSchemeTitle" class="form-control" placeholder="योजना का नाम"></div>
+        <div class="form-group"><textarea id="newSchemeDesc" class="form-control" rows="2" placeholder="विवरण..."></textarea></div>
+        <div style="text-align:center;"><button class="btn-submit" id="btnSaveScheme" onclick="saveScheme()"><i class="fa-solid fa-plus"></i> जोड़ें</button></div>
+        <h5 style="font-size:0.88rem; font-weight:700; margin:14px 0 6px 0;">वर्तमान योजनाएँ सूची</h5>
+        <div class="admin-card-deck" id="admSchemesCardList"></div>
+      </div>
+
+      <div id="adTabInstitutions" class="admin-tab-sec" style="display:none;">
+        <h5 style="font-size:0.9rem; font-weight:700; margin-bottom:6px;">नई सरकारी संस्था जोड़ें</h5>
+        <div class="form-group"><input type="text" id="newInstTitle" class="form-control" placeholder="संस्था का नाम"></div>
+        <div class="form-group"><input type="text" id="newInstHead" class="form-control" placeholder="पद / प्रभारी"></div>
+        <div class="form-group"><input type="tel" id="newInstPhone" class="form-control" placeholder="फ़ोन नंबर"></div>
+        <div style="text-align:center;"><button class="btn-submit" onclick="addNewInstitution()"><i class="fa-solid fa-plus"></i> जोड़ें</button></div>
+        <h5 style="font-size:0.88rem; font-weight:700; margin:14px 0 6px 0;">वर्तमान संस्थाएँ सूची</h5>
+        <div class="admin-card-deck" id="admInstitutionsCardList"></div>
+      </div>
+
+      <div id="adTabOfficers" class="admin-tab-sec" style="display:none;">
+        <h5 style="font-size:0.9rem; font-weight:700; margin-bottom:6px;">नया मुख्य पदाधिकारी जोड़ें</h5>
+        <div class="form-group"><input type="text" id="newOfficerRole" class="form-control" placeholder="पद"></div>
+        <div class="form-group"><input type="text" id="newOfficerName" class="form-control" placeholder="नाम"></div>
+        <div class="form-group"><input type="tel" id="newOfficerPhone" class="form-control" placeholder="मोबाइल नंबर"></div>
+        <div style="text-align:center;"><button class="btn-submit" onclick="addNewOfficer()"><i class="fa-solid fa-plus"></i> जोड़ें</button></div>
+        <h5 style="font-size:0.88rem; font-weight:700; margin:14px 0 6px 0;">वर्तमान पदाधिकारी सूची</h5>
+        <div class="admin-card-deck" id="admOfficersCardList"></div>
+      </div>
+
+      <div id="adTabPanchs" class="admin-tab-sec" style="display:none;">
+        <h5 style="font-size:0.9rem; font-weight:700; margin-bottom:6px;">नया वार्ड पंच जोड़ें</h5>
+        <div style="grid-template-columns:1fr 2fr; gap:6px; display:grid;">
+          <input type="number" id="newPanchWard" class="form-control" placeholder="वार्ड (1-11)" min="1" max="11">
+          <input type="text" id="newPanchName" class="form-control" placeholder="नाम">
+        </div>
+        <div class="form-group" style="margin-top:6px;"><input type="tel" id="newPanchPhone" class="form-control" placeholder="मोबाइल नंबर"></div>
+        <div style="text-align:center;"><button class="btn-submit" onclick="addWardPanch()"><i class="fa-solid fa-plus"></i> जोड़ें</button></div>
+        <h5 style="font-size:0.88rem; font-weight:700; margin:14px 0 6px 0;">वर्तमान वार्ड पंच सूची (1 से 11)</h5>
+        <div class="admin-card-deck" id="admPanchCardList"></div>
+      </div>
+
+      <div id="adTabSecurityAdmin" class="admin-tab-sec" style="display:none;">
+        <div id="secDevSettings" style="background:#fff; border:1px solid var(--border); padding:12px; border-radius:6px; margin-bottom:14px;">
+          <div style="font-weight: 700; color: var(--primary); margin-bottom: 8px;">
+            <i class="fa-solid fa-user-shield"></i> Developer Password Update
+          </div>
+          <div class="form-group">
+            <input type="password" id="cfgDevPin" class="form-control" placeholder="New Password" autocomplete="new-password">
+          </div>
+          <div style="text-align:center; margin-top:8px;">
+            <button onclick="saveDevSecurity()" class="btn-submit" style="background: #ea580c;">Update Password</button>
+          </div>
+        </div>
+
+        <div id="secSarpanchSettings" style="background:#fff; border:1px solid var(--border); border-left: 4px solid #16a34a; padding:12px; border-radius:6px; margin-bottom:14px;">
+          <div style="font-weight: 700; color: #16a34a; margin-bottom: 8px;">
+            <i class="fa-solid fa-crown"></i> Sarpanch Password
+          </div>
+          <div class="form-group">
+            <input type="email" id="cfgSarpanchEmail" class="form-control" placeholder="Registered Sarpanch Email" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <input type="password" id="cfgSarpanchPin" class="form-control" placeholder="New Password" autocomplete="new-password">
+          </div>
+          <div style="text-align:center; margin-top:8px;">
+            <button onclick="saveSarpanchSecurity()" class="btn-submit" style="background: #16a34a;">Update Password</button>
+          </div>
+        </div>
+
+        <div id="secVdoSettings" style="background:#fff; border:1px solid var(--border); border-left: 4px solid #0284c7; padding:12px; border-radius:6px; margin-bottom:10px;">
+          <div style="font-weight: 700; color: #0284c7; margin-bottom: 8px;">
+            <i class="fa-solid fa-user-tie"></i> VDO Password
+          </div>
+          <div class="form-group">
+            <input type="email" id="cfgVdoEmail" class="form-control" placeholder="Registered VDO Email" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <input type="password" id="cfgVdoPin" class="form-control" placeholder="New Password" autocomplete="new-password">
+          </div>
+          <div style="text-align:center; margin-top:8px;">
+            <button onclick="saveVdoSecurity()" class="btn-submit" style="background: #0284c7;">Update Password</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="adTabBackup" class="admin-tab-sec" style="display:none;">
+        <div style="background:#fff; border:1px solid var(--border); padding:14px; border-radius:6px; text-align:center; margin-bottom:10px;">
+          <p style="font-size:0.8rem; margin-bottom:8px;">Securely export all database records.</p>
+          <button onclick="downloadJsonBackup()" style="background:#059669; color:#fff; border:none; padding:7px 14px; border-radius:50px; font-weight:700; cursor:pointer; font-size:0.8rem;"><i class="fa-solid fa-download"></i> Backup Download</button>
+        </div>
+        <div style="background:#fff; border:1px solid var(--border); padding:14px; border-radius:6px; text-align:center;">
+          <input type="file" id="restoreJsonFile" accept=".json" style="font-size:0.78rem; margin-bottom:8px;">
+          <button onclick="restoreJsonBackup()" style="background:var(--primary); color:#fff; border:none; padding:7px 14px; border-radius:50px; font-weight:700; cursor:pointer; font-size:0.8rem;"><i class="fa-solid fa-upload"></i> Restore Data</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       EXECUTIVE GOVERNMENT FOOTER SECTION
+       ========================================== -->
+  <footer>
+    <div class="footer-top-details">
+      <div class="copy-txt">
+        COPYRIGHT &copy; 2026 <b>Gram Panchayat Ajnawar</b>. All Rights Reserved.
+      </div>
+      <div>
+        Site Last Updated on <span class="last-updated-pill">Oct 09, 2026</span>
+      </div>
+    </div>
+
+    <!-- Edge-to-Edge Contact Us Bar -->
+    <div class="footer-bottom-strip">
+      <a href="javascript:void(0);" data-bs-toggle="offcanvas" data-bs-target="#contactUsCanvas" class="footer-contact-box-btn">
+        <i class="fa-solid fa-headset"></i> Contact Us
+      </a>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       CONTACT US & NODAL OFFICER OFFCANVAS
+       ========================================== -->
+  <div class="offcanvas offcanvas-bottom" style="height: auto; background-color: #fffdf5 !important; border-top: 3.5px solid #003366;" tabindex="-1" id="contactUsCanvas" aria-labelledby="contactUsCanvasLabel">
+    <div class="offcanvas-header border-bottom py-2 px-3" style="background-color: #fef3c7;">
+      <h4 class="offcanvas-title w-100 text-center fw-bold text-primary" id="contactUsCanvasLabel" style="color: #003366 !important; font-size: 0.98rem; margin: 0;">
+        <i class="fa-solid fa-address-book me-2" style="color: #ea580c;"></i> Contact &amp; Nodal Officer Details
+      </h4>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style="font-size: 0.8rem;"></button>
+    </div>
+
+    <div class="offcanvas-body py-3 px-3">
+      <!-- Top Block: Administrative Details -->
+      <div>
+        <b style="color: #003366; font-size: 0.96rem; display: block; margin-bottom: 3px;">
+          <i class="fa-solid fa-landmark me-1" style="color: #ea580c;"></i> Gram Panchayat Ajnawar
+        </b>
+        <div style="line-height: 1.4; color: #334155; font-size: 0.82rem;">
+          Gram Panchayat Bhavan, Ajnawar, Post: Ajnawar<br>
+          Tehsil: Chhipabarod, District: Baran (Rajasthan) - 325221
+        </div>
+        
+        <!-- Live Helpdesk & Panchayat Email -->
+        <div class="mt-2" style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+          <a href="javascript:void(0);" data-bs-dismiss="offcanvas" onclick="openLiveHelpdeskChat()" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: #003366; background: #e0f2fe; padding: 4px 12px; border-radius: 5px; font-size: 0.78rem; border: 1.2px solid #bae6fd; text-decoration: none; box-shadow: 0 1px 3px rgba(0, 51, 102, 0.06);">
+            <i class="fa-solid fa-headset text-primary"></i> Live Helpdesk
+          </a>
+          <a href="mailto:contact.ajnawar@gmail.com" style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.78rem; font-weight: 700; color: #0284c7; text-decoration: none;">
+            <i class="fa-solid fa-envelope" style="color: #ea580c;"></i> contact.ajnawar@gmail.com
+          </a>
+        </div>
+      </div>
+
+      <!-- Crisp Clean Divider -->
+      <div style="border-top: 1.5px dashed #cbd5e1; margin: 10px 0;"></div>
+
+      <!-- Bottom Block: Technical Desk & Credentials -->
+      <div>
+        <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; color: #ea580c; font-weight: 800; margin-bottom: 2px;">
+          NODAL OFFICER / IT EXECUTIVE
+        </div>
+        <div style="color: #0f172a; font-weight: 800; font-size: 0.96rem; margin-bottom: 3px;">
+          Kuldeep <span style="font-size: 0.8rem; font-weight: 700; color: #003366;">(Digital Helpdesk Incharge)</span>
+        </div>
+        
+        <!-- Developer Email Link -->
+        <div style="margin-bottom: 5px;">
+          <a href="mailto:developer.ajnawar@gmail.com" style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.76rem; font-weight: 700; color: #0284c7; text-decoration: none;">
+            <i class="fa-solid fa-envelope" style="color: #ea580c;"></i> developer.ajnawar@gmail.com
+          </a>
+        </div>
+
+        <div style="font-size: 0.72rem; color: #64748b; line-height: 1.35;">
+          Site Developed &amp; Managed by Gram Panchayat Ajnawar<br>
+          <span style="font-weight: 700; color: #003366; letter-spacing: 0.3px;">OFFICIAL E-GOVERNANCE PORTAL • RAJASTHAN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of Contact Us Offcanvas -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="js/logger.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+
+<!-- Start of Tawk.to Script (Zero Flicker API Mode) -->
+<script type="text/javascript">
+var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+
+Tawk_API.onLoad = function(){
+  Tawk_API.minimize();
+  Tawk_API.hideWidget();
+};
+
+Tawk_API.onChatMinimized = function(){
+  Tawk_API.hideWidget();
+};
+
+function openLiveHelpdeskChat() {
+  if (window.Tawk_API) {
+    Tawk_API.showWidget();
+    Tawk_API.maximize();
+  }
+}
+
+(function(){
+var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+s1.async = true;
+s1.src = 'https://embed.tawk.to/6ac867a6fd032e34bf1a4631/default';
+s1.charset = 'UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1, s0);
+})();
+</script>
+<!-- End of Tawk.to Script -->
+</body>
+</html>
